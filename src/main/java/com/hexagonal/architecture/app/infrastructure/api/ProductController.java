@@ -2,8 +2,8 @@ package com.hexagonal.architecture.app.infrastructure.api;
 
 import com.hexagonal.architecture.app.adapters.mapper.product.ProductInputData;
 import com.hexagonal.architecture.app.adapters.mapper.product.ProductOutputData;
-import com.hexagonal.architecture.app.core.entity.Paged;
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.Paged;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 import com.hexagonal.architecture.app.core.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,31 +16,31 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
-public class ProductResource extends RestResource {
+public class ProductController extends RestResource {
     private final ProductService service;
     @Autowired
-    public ProductResource(ProductService service) {
+    public ProductController(ProductService service) {
         this.service = service;
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> create(@RequestBody ProductInputData createUserInputData) {
-        ProductEntity product = createUserInputData.toEntity();
+        ProductDTO product = createUserInputData.toEntity();
         service.save(product);
         return created(getLocation(product.getId()));
     }
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProductOutputData findById(@PathVariable("id") Long id) {
-        ProductEntity product = service.findProductById(id);
+        ProductDTO product = service.findProductById(id);
         return new ProductOutputData().fromEntity(product);
     }
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProductOutputData>> findAllPaged(
-            @RequestParam(value = "_page", required = false, defaultValue = "1") int page,
-            @RequestParam(value = "_limit", required = false, defaultValue = "0") int itemsPerPage) {
-        Paged<ProductEntity> paged = service.findAllProductPaged(page, itemsPerPage);
+            @RequestParam(value = "_page", required = false, defaultValue = "1") Integer page,
+            @RequestParam(value = "_limit", required = false, defaultValue = "0") Integer itemsPerPage) {
+        Paged<ProductDTO> paged = service.findAllProductPaged(page, itemsPerPage);
 
         List<ProductOutputData> outputDataList = paged
                 .getItems()
@@ -53,7 +53,7 @@ public class ProductResource extends RestResource {
 
         return new ResponseEntity<>(outputDataList, headers, HttpStatus.OK);
     }
-    private ProductOutputData toOutputData(ProductEntity product) {
+    private ProductOutputData toOutputData(ProductDTO product) {
         return new ProductOutputData().fromEntity(product);
     }
 }

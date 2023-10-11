@@ -1,9 +1,9 @@
-package com.hexagonal.architecture.app.core.entity;
+package com.hexagonal.architecture.app.core.dtos;
 
-public class UserEntity {
+public class UserDTO {
     private final Long id;
     private final String name;
-    public UserEntity(Long id, String name) {
+    public UserDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }

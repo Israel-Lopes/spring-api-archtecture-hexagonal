@@ -1,6 +1,6 @@
 package com.hexagonal.architecture.app.core.usecase.product;
 
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 import com.hexagonal.architecture.app.core.exception.DuplicatedException;
 import com.hexagonal.architecture.app.core.repository.ProductRepository;
 
@@ -9,7 +9,7 @@ public class SaveProductUseCase {
     public SaveProductUseCase(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    public void execute(ProductEntity product) {
+    public void execute(ProductDTO product) {
         long productCode = product.getId();
         if (productRepository.findById(productCode) != null) {
             throw new DuplicatedException("Product code " + productCode + " already exists");

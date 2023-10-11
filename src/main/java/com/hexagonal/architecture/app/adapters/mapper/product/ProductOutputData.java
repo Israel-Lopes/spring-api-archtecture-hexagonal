@@ -1,9 +1,9 @@
 package com.hexagonal.architecture.app.adapters.mapper.product;
 
 import com.hexagonal.architecture.app.adapters.mapper.OutputMapper;
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 
-public class ProductOutputData implements OutputMapper<ProductEntity, ProductOutputData> {
+public class ProductOutputData implements OutputMapper<ProductDTO, ProductOutputData> {
     private Long id;
     private String name;
     private String description;
@@ -11,7 +11,7 @@ public class ProductOutputData implements OutputMapper<ProductEntity, ProductOut
     private Integer stock;
     private String image;
     @Override
-    public ProductOutputData fromEntity(ProductEntity entity) {
+    public ProductOutputData fromEntity(ProductDTO entity) {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();

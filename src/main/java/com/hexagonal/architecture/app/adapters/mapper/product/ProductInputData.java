@@ -1,10 +1,9 @@
 package com.hexagonal.architecture.app.adapters.mapper.product;
 
 import com.hexagonal.architecture.app.adapters.mapper.InputMapper;
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 
-public class ProductInputData implements InputMapper<ProductEntity> {
-
+public class ProductInputData implements InputMapper<ProductDTO> {
     private Long id;
     private String name;
     private String description;
@@ -12,8 +11,8 @@ public class ProductInputData implements InputMapper<ProductEntity> {
     private Integer stock;
     private String image;
     @Override
-    public ProductEntity toEntity() {
-        return new ProductEntity(id, name, description, price, stock, image);
+    public ProductDTO toEntity() {
+        return new ProductDTO(id, name, description, price, stock, image);
     }
     public long getId() {
         return id;

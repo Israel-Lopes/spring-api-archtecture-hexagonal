@@ -1,4 +1,4 @@
-package com.hexagonal.architecture.app.core.entity;
+package com.hexagonal.architecture.app.core.dtos;
 
 import java.util.List;
 

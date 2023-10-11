@@ -1,12 +1,12 @@
 package com.hexagonal.architecture.app.core.repository;
 
-import com.hexagonal.architecture.app.core.entity.Paged;
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.Paged;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 
 public interface ProductRepository {
-    Paged<ProductEntity> findAllPaged(Integer page, Integer itemsPerPage);
+    Paged<ProductDTO> findAllPaged(Integer page, Integer itemsPerPage);
 
-    ProductEntity findById(Long id);
+    ProductDTO findById(Long id);
 
-    void save(ProductEntity product);
+    void save(ProductDTO product);
 }

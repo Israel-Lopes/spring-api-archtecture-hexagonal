@@ -1,13 +1,13 @@
 package com.hexagonal.architecture.app.adapters.repository.model.adapter;
 
 import com.hexagonal.architecture.app.adapters.repository.ModelAdapter;
-import com.hexagonal.architecture.app.adapters.repository.model.ProductModel;
-import com.hexagonal.architecture.app.core.entity.ProductEntity;
+import com.hexagonal.architecture.app.adapters.repository.model.ProductEntity;
+import com.hexagonal.architecture.app.core.dtos.ProductDTO;
 
-public class ProductModelAdapter implements ModelAdapter<ProductEntity, ProductModel> {
+public class ProductModelAdapter implements ModelAdapter<ProductDTO, ProductEntity> {
     @Override
-    public ProductModel toModel(ProductEntity entity) {
-        ProductModel model = new ProductModel();
+    public ProductEntity toModel(ProductDTO entity) {
+        ProductEntity model = new ProductEntity();
         model.setId(entity.getId());
         model.setName(entity.getName());
         model.setDescription(entity.getDescription());
@@ -17,8 +17,8 @@ public class ProductModelAdapter implements ModelAdapter<ProductEntity, ProductM
         return model;
     }
     @Override
-    public ProductEntity toEntity(ProductModel model) {
-        return new ProductEntity(model.getId(), model.getName(), model.getDescription(), model.getPrice(),
+    public ProductDTO toEntity(ProductEntity model) {
+        return new ProductDTO(model.getId(), model.getName(), model.getDescription(), model.getPrice(),
                 model.getStock(), model.getImage());
     }
 }
